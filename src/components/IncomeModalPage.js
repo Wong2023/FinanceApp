@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import IncomeModal from "./IncomeModal";
+import IncomeModalView from "./IncomeModalView";
 
 export default function IncomeModalPage() {
   const navigate = useNavigate();
@@ -25,5 +25,5 @@ export default function IncomeModalPage() {
     }
   };
 
-  return <IncomeModal onClose={handleClose} onSave={handleSave} />;
+  return <IncomeModalView onClose={handleClose} onSave={handleSave} />;
 }

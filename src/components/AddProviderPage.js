@@ -68,41 +68,25 @@ export default function AddProviderPage() {
       <FormBox>
         <FormRow>
           <Label>{t("name")}:</Label>
-          <Input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
+          <Input type="text" name="name" value={formData.name} onChange={handleChange}
           />
         </FormRow>
 
         <FormRow>
           <Label>{t("address")}:</Label>
-          <Input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
+          <Input type="text" name="address" value={formData.address} onChange={handleChange}
           />
         </FormRow>
 
         <FormRow>
           <Label>{t("contact")}:</Label>
-          <Input
-            type="text"
-            name="number"
-            value={formData.number}
-            onChange={handleChange}
+          <Input type="text" name="number" value={formData.number} onChange={handleChange}
           />
         </FormRow>
 
         <FormRow>
           <Label>Email:</Label>
-          <Input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
+          <Input type="email" name="email" value={formData.email} onChange={handleChange}
           />
         </FormRow>
 

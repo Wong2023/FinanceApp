@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  ModalBackdrop,
-  ModalBox,
-  ModalTitle,
-  ExpenseForm,
-  ModalRow,
-  ModalActions,
-  Label,
-  Input,
-  Select,
-  Btn,
-  BoxShadow,
-  AddNewBox,
-  Field
+  ModalBackdrop,ModalBox,ModalTitle,ExpenseForm,ModalRow,ModalActions,Label,Input,Select,Btn,BoxShadow,AddNewBox,Field
 } from "../styles/ExpenseModalStyles";
 
 export default function ExpenseModal({ onSave }) {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [state, setState] = useState({
     facturaNumber: "",
     date: "",
@@ -32,12 +19,10 @@ export default function ExpenseModal({ onSave }) {
     iva: "",
     total: "",
   });
-
   const handleChange = e => {
     const { name, value } = e.target;
     setState(prev => ({ ...prev, [name]: value }));
   };
-
   const handleClose = () => {
     if (location.state?.fromDashboard) {
       navigate("/dashboard");
@@ -55,13 +40,10 @@ export default function ExpenseModal({ onSave }) {
   return (
     <ModalBackdrop>
       <ModalTitle>+ Add Expenses</ModalTitle>
-      
       <BoxShadow>
         <ModalBox>
           <AddNewBox>
-            {/* <Btn type="button" style={{ minWidth: 90 }}>+ Add New</Btn> */}
           </AddNewBox>
-
           <form onSubmit={handleSubmit} autoComplete="off">
             <ExpenseForm>
               <ModalRow>
@@ -90,7 +72,6 @@ export default function ExpenseModal({ onSave }) {
                   <Input name="cif" value={state.cif} onChange={handleChange} width="100%" />
                 </Field>
               </ModalRow>
-
               <ModalRow>
                 <Field>
                   <Label>Base</Label>
@@ -109,7 +90,6 @@ export default function ExpenseModal({ onSave }) {
                   </div>
                 </Field>
               </ModalRow>
-
               <ModalRow>
                 <Field>
                   <div style={{ display: "flex", gap: "103px" }}>
@@ -129,7 +109,6 @@ export default function ExpenseModal({ onSave }) {
                 </Field>
               </ModalRow>
             </ExpenseForm>
-
             <ModalActions>
               <Btn type="button" onClick={handleClose}>Cancel</Btn>
               <Btn primary type="submit">Save</Btn>

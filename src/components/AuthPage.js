@@ -2,20 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AuthContainer,
-  AuthContent,
-  AuthTitle,
-  AuthInput,
-  AuthButton,
-  AuthSwitch,
-  Toast,
-  LanguageButtonsWrapper,
-  LangButton,
+  AuthContainer, AuthContent, AuthTitle, AuthInput, AuthButton, AuthSwitch, Toast, LanguageButtonsWrapper, LangButton,
 } from "../styles/authStyles";
 import { useLanguage } from "./LanguageContext";
 
 const MCF_BASE = "/api"; // proxy -> backend
-
 export default function AuthPage() {
   const [isRegister, setIsRegister] = useState(false);
   const [username, setUsername] = useState("");
@@ -52,24 +43,18 @@ export default function AuthPage() {
 
     const users = await fetchAllUsers();
     if (!users) {
-      showToast("Ошибка соединения с сервером");
+      showToast("error with server connection");
       return;
     }
 
     if (isRegister) {
       const exists = users.find((u) => (u.email || u.name) === username);
       if (exists) {
-        showToast("Пользователь уже существует");
+        showToast("USer already exist");
         return;
       }
 
-      const body = {
-        name: username,
-        email: username,
-        password,
-        contact: "0000000000",
-        address: "",
-        projectId: "ec08bb10-c5c8-4608-8176-164906872545", // укажи актуальный ID проекта
+      const body = { name: username, email: username, password, contact: "0000000000", address: "", projectId: "ec08bb10-c5c8-4608-8176-164906872545",
       };
 
       const res = await fetch(`${MCF_BASE}/users/new`, {
@@ -79,19 +64,17 @@ export default function AuthPage() {
       });
 
       if (!res.ok) {
-        showToast("Ошибка регистрации");
+        showToast("registration error");
         return;
       }
-
-      showToast("Регистрация успешна");
+      showToast("registration successful");
       setIsRegister(false);
     } else {
       const user = users.find((u) => (u.email || u.name) === username);
       if (!user) {
-        showToast("Неверный логин или пароль");
+        showToast("incorrect login or password");
         return;
       }
-
       localStorage.setItem("auth", "true");
       localStorage.setItem("user", JSON.stringify(user));
       navigate("/dashboard");
@@ -115,17 +98,9 @@ export default function AuthPage() {
             <LangButton onClick={() => setLang("es")}>ES</LangButton>
           </LanguageButtonsWrapper>
         </div>
-
-        <AuthInput
-          type="text"
-          placeholder={t("username")}
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+        <AuthInput type="text" placeholder={t("username")} value={username} onChange={(e) => setUsername(e.target.value)}
         />
-        <AuthInput
-          type="password"
-          placeholder={t("password")}
-          value={password}
+        <AuthInput type="password" placeholder={t("password")} value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <AuthButton onClick={handleAuth}>
@@ -138,7 +113,6 @@ export default function AuthPage() {
           </span>
         </AuthSwitch>
       </AuthContent>
-
       {toastMessage && <Toast>{toastMessage}</Toast>}
     </AuthContainer>
   );
