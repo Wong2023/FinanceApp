@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function useExpensesLogic(t) {
+// export function useExpensesLogic(t) {
+const useExpensesLogic = (t) => {
   const navigate = useNavigate();
 
   const fixedExpenses = [
@@ -52,3 +53,5 @@ export function useExpensesLogic(t) {
     selectedYear, setSelectedYear
   };
 }
+
+export default useExpensesLogic;

@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  ModalBg,
-  ModalBlock,
-  ModalRow,
-  Input,
-  Select,
-  SizeCheckbox,
-  ModalActions,
-  BackdropContainer,
-  BigBlock,
-  ModalBtn,
-  SizeOptions
+  ModalBg,ModalBlock,ModalRow,Input,Select,SizeCheckbox,ModalActions,BackdropContainer,BigBlock,ModalBtn,SizeOptions
 } from "../styles/addItemStyles";
 import styled from "styled-components";
 import { useLanguage } from "./LanguageContext";
@@ -27,8 +17,7 @@ const SizeOptionItem = styled.div`
   align-items: center;
   gap: 3px;
 `;
-
-function AddItemPage() {
+const AddItemPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { t } = useLanguage();
@@ -37,14 +26,22 @@ function AddItemPage() {
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
-
-  useEffect(() => {
-    if (id !== undefined) {
+  const loadItemData = (itemId) => {
+    if (itemId !== undefined) {
       const items = JSON.parse(localStorage.getItem("catalog_items") || "[]");
-      const item = items[id];
-      if (item) { setCategory(item.category); setSeries(item.series); setName(item.name); setSize(item.size); setPrice(item.price);
+      const item = items[itemId];
+      if (item) {
+        setCategory(item.category);
+        setSeries(item.series);
+        setName(item.name);
+        setSize(item.size);
+        setPrice(item.price);
       }
     }
+  };
+
+  useEffect(() => {
+    loadItemData(id);
   }, [id]);
 
   const saveItem = () => {
@@ -61,6 +58,7 @@ function AddItemPage() {
     localStorage.setItem("catalog_items", JSON.stringify(items));
     navigate("/catalog");
   };
+
   return (
     <>
       <BackdropContainer>
@@ -92,18 +90,22 @@ function AddItemPage() {
               <SizeOptions>
                 {["Big", "Small", "Tiny"].map((s) => (
                   <SizeOptionItem key={s}>
-                    <SizeCheckbox type="radio" value={s} checked={size === s} onChange={() => setSize(s)}
-                    />
+                    <SizeCheckbox
+                      type="radio"
+                      value={s}
+                      checked={size === s}
+                      onChange={() => setSize(s)}/>
                     <span>{t(s.toLowerCase())}</span>
                   </SizeOptionItem>
                 ))}
               </SizeOptions>
             </ModalRow>
-
             <ModalRow>
               <label>{t("price")}:</label>
-              <Input type="number" value={price} onChange={(e) => setPrice(e.target.value)}
-              />
+              <Input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}/>
             </ModalRow>
           </ModalContent>
           <ModalActions>
@@ -114,6 +116,6 @@ function AddItemPage() {
       </ModalBg>
     </>
   );
-}
+};
 
 export default AddItemPage;

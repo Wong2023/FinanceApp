@@ -7,9 +7,10 @@ import {
   MonthYearRow, ContentArea, AddButton,
 } from "../styles/ExpensesStyles";
 import { useLanguage } from "./LanguageContext";
-import { useExpensesLogic } from "./ExpensesLogic";
+import useExpensesLogic from "./ExpensesLogic";
 
-export default function ExpensesPage() {
+// export default function ExpensesPage() {
+const ExpensesPage = () => {
   const { t } = useLanguage();
   const {
     navigate, fixedExpenses, staffExpenses, materialsList, providersList,
@@ -100,3 +101,5 @@ export default function ExpensesPage() {
     </ContentArea>
   );
 }
+
+export default ExpensesPage;

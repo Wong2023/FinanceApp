@@ -11,11 +11,11 @@ import {
   SaveButton,
 } from "../styles/addProviderStyles";
 import { useNavigate } from "react-router-dom";
-import { useLanguage } from "./LanguageContext"; // подключаем контекст перевода
+import { useLanguage } from "./LanguageContext"; 
 
-export default function AddProviderPage() {
+const AddProviderPage  = () => { 
   const navigate = useNavigate();
-  const { t } = useLanguage(); // получаем функцию перевода
+  const { t } = useLanguage(); 
 
   const [formData, setFormData] = useState({
     name: "",
@@ -27,15 +27,12 @@ export default function AddProviderPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // 🔒 фильтрация для номера (только цифры)
     if (name === "number") {
       const onlyNums = value.replace(/\D/g, "");
       setFormData({ ...formData, [name]: onlyNums });
       return;
     }
 
-    // 📧 фильтрация для email (только с "@")
     if (name === "email") {
       setFormData({ ...formData, [name]: value });
       return;
@@ -45,11 +42,10 @@ export default function AddProviderPage() {
   };
 
   const handleCancel = () => {
-    navigate("/providers"); // возвращаемся на список провайдеров
+    navigate("/providers"); 
   };
 
   const handleSave = () => {
-    // 🚫 если email пустой или без "@", не даём сохранить
     if (formData.email && !formData.email.includes("@")) {
       return;
     }
@@ -58,7 +54,7 @@ export default function AddProviderPage() {
     const updatedProviders = [...existingProviders, formData];
     localStorage.setItem("providers", JSON.stringify(updatedProviders));
 
-    navigate("/providers"); // после сохранения возвращаемся
+    navigate("/providers"); 
   };
 
   return (
@@ -113,3 +109,5 @@ export default function AddProviderPage() {
     </Container>
   );
 }
+
+export default AddProviderPage;

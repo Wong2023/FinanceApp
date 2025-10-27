@@ -23,5 +23,3 @@ const clients = [
 ];
 
 export default clients;
-// Если хочешь именованный экспорт — раскомментируй строку ниже и меняй импорт:
-// export { clients };

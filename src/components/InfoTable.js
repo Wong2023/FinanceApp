@@ -7,7 +7,7 @@ import {
   Item,
 } from "../styles/tables";
 
-export default function InfoTable() {
+const infotable = () => {
   const { t } = useLanguage();
 
   return (
@@ -21,3 +21,5 @@ export default function InfoTable() {
     </Container>
   );
 }
+
+export default infotable;

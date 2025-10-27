@@ -14,7 +14,7 @@ const daysInMonth = (y,m)=>new Date(y,m+1,0).getDate();
 const firstWeekday = (y,m)=>(new Date(y,m,1).getDay()+6)%7;
 const toISO=(y,m,d)=>`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
 
-export default function CalendarView(p) {
+const CalendarView = (p) => {
   const {
     title,setTitle,date,setDate,time,setTime,addEvent,filtered,editId,setEditId,
     editTitle,setEditTitle,editDate,setEditDate,editTime,setEditTime,saveEdit,del,startEdit,
@@ -110,3 +110,5 @@ export default function CalendarView(p) {
     </ToastStack>
   </Content></Container>);
 }
+
+export default CalendarView;

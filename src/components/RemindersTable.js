@@ -7,7 +7,7 @@ import {
   Item,
 } from "../styles/tables";
 
-export default function RemindersTable() {
+const RemindersTable = () => {
   const { t } = useLanguage();
 
   return (
@@ -21,3 +21,5 @@ export default function RemindersTable() {
     </Container>
   );
 }
+
+export default RemindersTable;

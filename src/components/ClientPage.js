@@ -1,43 +1,32 @@
 import React, { useState, useEffect } from "react";
-import clients from "./database/clients"; // база клиентов
-import { useLanguage } from "./LanguageContext"; // импорт контекста для перевода
+import clients from "./database/clients";
+import { useLanguage } from "./LanguageContext";
 import {
-  AppContainer,
-  PageContainer,
-  PageHeader,
-  SearchBox,
-  SearchInput,
-  SearchBtn,
-  TableWrapper,
-  Table,
-  TableHeader,
-  TableRow,
-  TableCell,
+  AppContainer, PageContainer, PageHeader, SearchBox, SearchInput,
+  SearchBtn, TableWrapper, Table, TableHeader, TableRow, TableCell,
 } from "../styles/ClientPageStyles";
 
 const ClientPage = () => {
-  const { t } = useLanguage(); // функция перевода
+  const { t } = useLanguage();
   const [search, setSearch] = useState("");
   const [allClients, setAllClients] = useState([]);
 
-  // функция загрузки клиентов из localStorage
+  // 🔹 Вынесенная логика загрузки клиентов
   const loadClients = () => {
     const storedClients = JSON.parse(localStorage.getItem("clientsData")) || [];
     setAllClients([...clients, ...storedClients]);
   };
 
+  // 🔹 Вынесенная логика для подписки на изменения localStorage
+  const subscribeToStorageChanges = () => {
+    const handleStorageChange = () => loadClients();
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  };
+
   useEffect(() => {
     loadClients();
-
-    // слушаем изменения localStorage из других вкладок/модалей
-    const handleStorageChange = () => {
-      loadClients();
-    };
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
+    return subscribeToStorageChanges();
   }, []);
 
   const filteredClients = allClients.filter((client) =>

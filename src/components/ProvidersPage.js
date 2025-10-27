@@ -1,21 +1,13 @@
 import React from "react";
 import {
-  Container,
-  Title,
-  AddButton,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Td,
-  ScrollContainer,
+  Container,Title,AddButton,Table,Thead,Tr,Th,Td,ScrollContainer,
 } from "../styles/providersStyles";
 import { useNavigate } from "react-router-dom";
-import { useLanguage } from "./LanguageContext"; // подключаем контекст
+import { useLanguage } from "./LanguageContext"; 
 
-export default function ProvidersPage() {
+const ProvidersPage = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage(); // получаем функцию t
+  const { t } = useLanguage(); 
   const [providers, setProviders] = React.useState([]);
 
   React.useEffect(() => {
@@ -61,3 +53,5 @@ export default function ProvidersPage() {
     </Container>
   );
 }
+
+export default ProvidersPage;

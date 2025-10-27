@@ -8,7 +8,7 @@ import {
   Container
 } from "../styles/tables";
 
-export default function PaymentsTable() {
+const PaymentsTable = () => {
   const { t } = useLanguage();
 
   return (
@@ -33,3 +33,5 @@ export default function PaymentsTable() {
     </Container>
   );
 }
+
+export default PaymentsTable;

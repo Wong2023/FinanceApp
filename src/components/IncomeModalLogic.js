@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export function useIncomeModalLogic(onSave, onClose) {
+const useIncomeModalLogic = (onSave, onClose) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -12,7 +12,11 @@ export function useIncomeModalLogic(onSave, onClose) {
   const fromDashboard = location.state?.fromDashboard || false;
 
   const [tab, setTab] = useState(
-    editingMode ? (sourceFromState === "offline" ? "gallery" : "online") : "gallery"
+    editingMode
+      ? sourceFromState === "offline"
+        ? "gallery"
+        : "online"
+      : "gallery"
   );
 
   const [form, setForm] = useState({
@@ -21,8 +25,12 @@ export function useIncomeModalLogic(onSave, onClose) {
     email: "", contact: "", country: "", comment: "", id: null,
   });
 
-  useEffect(() => {
+  const applyEditingIncome = () => {
     if (editingMode && editingIncome) setForm(editingIncome);
+  };
+
+  useEffect(() => {
+    applyEditingIncome();
   }, [editingMode, editingIncome]);
 
   const handleChange = (e) => {
@@ -44,14 +52,23 @@ export function useIncomeModalLogic(onSave, onClose) {
     const source = tab === "gallery" ? "offline" : "online";
 
     const clientData = {
-      name: form.clientName, contact: form.contact,
-      email: form.email, country: form.country,
+      name: form.clientName,
+      contact: form.contact,
+      email: form.email,
+      country: form.country,
     };
 
-    if (clientData.name || clientData.email || clientData.contact || clientData.country) {
+    if (
+      clientData.name ||
+      clientData.email ||
+      clientData.contact ||
+      clientData.country
+    ) {
       const existing = JSON.parse(localStorage.getItem("clientsData")) || [];
       const updated = existing.some((c) => c.email === clientData.email)
-        ? existing.map((c) => (c.email === clientData.email ? clientData : c))
+        ? existing.map((c) =>
+            c.email === clientData.email ? clientData : c
+          )
         : [...existing, clientData];
       localStorage.setItem("clientsData", JSON.stringify(updated));
     }
@@ -77,7 +94,15 @@ export function useIncomeModalLogic(onSave, onClose) {
   };
 
   return {
-    form, handleChange, handleSubmit, handleCancel,
-    handleContactChange, tab, setTab, editingMode,
+    form,
+    handleChange,
+    handleSubmit,
+    handleCancel,
+    handleContactChange,
+    tab,
+    setTab,
+    editingMode,
   };
-}
+};
+
+export default useIncomeModalLogic;

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-/* Основная рабочая зона */
 export const PageContainer = styled.div`
   flex: 1;
   background: #faefe2;
@@ -93,3 +92,6 @@ export const ModalBtn = styled.button`
     transform: translate(2px, 2px);
   }
 `;
+
+
+// TODO: fonts

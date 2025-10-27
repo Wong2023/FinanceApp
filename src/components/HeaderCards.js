@@ -26,7 +26,7 @@ const Value = styled.div`
   font-size: 24px;
 `;
 
-export default function HeaderCards() {
+const HeaderCards = () => {
   const { t } = useLanguage();
 
   return (
@@ -46,3 +46,5 @@ export default function HeaderCards() {
     </CardContainer>
   );
 }
+
+export default HeaderCards;

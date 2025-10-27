@@ -6,9 +6,9 @@ import {
   ModalActions, ModalBtn, InfoSection, ClientSection,
   CommentInput, HeaderContainer, TabsContainer, FieldBlock,
 } from "../styles/modal";
-import { useIncomeModalLogic } from "./IncomeModalLogic";
+import useIncomeModalLogic from "./IncomeModalLogic";
 
-export default function IncomeModal({ onSave, onClose }) {
+const IncomeModal = ({ onSave, onClose }) => {
   const { t } = useLanguage();
   const {
     form, handleChange, handleSubmit, handleCancel,
@@ -114,3 +114,5 @@ export default function IncomeModal({ onSave, onClose }) {
     </PageContainer>
   );
 }
+
+export default IncomeModal;

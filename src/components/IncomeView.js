@@ -6,9 +6,9 @@ import {
   TableBody, TableCell, TableActionLink, DeleteButton,
 } from "../styles/incomePage";
 import { useLanguage } from "./LanguageContext";
-import { useIncomeLogic } from "./IncomeLogic";
+import useIncomeLogic from "./IncomeLogic";
 
-export default function IncomePage() {
+const incomePage = () => {
   const { t } = useLanguage();
   const {
     mode, setMode, selectedMonth, setSelectedMonth,
@@ -105,3 +105,5 @@ export default function IncomePage() {
     </IncomeContainer>
   );
 }
+
+export default incomePage;

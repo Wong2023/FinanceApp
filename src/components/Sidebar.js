@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  SidebarContainer,SidebarIcon,MenuBlock,Title,Dropdown,DropdownItem,
+  SidebarContainer,
+  SidebarIcon,
+  MenuBlock,
+  Title,
+  Dropdown,
+  DropdownItem,
 } from "../styles/sidebar";
 import { useLanguage } from "./LanguageContext"; 
+
 const iconUrl = "https://i.imgur.com/vD4fJbl.png";
-export default function Sidebar() {
+const Sidebar = () => {
   const [hovered, setHovered] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useLanguage(); 
   const isDashboard =
     location.pathname === "/" || location.pathname.startsWith("/dashboard");
-  const [sidebarColor, setSidebarColor] = useState("#6ce1d1");
-  useEffect(() => {
-    if (location.pathname.startsWith("/income")) {
-      setSidebarColor("#ffe144");
-    } else if (location.pathname.startsWith("/providers")) {
-      setSidebarColor("#cbf3d2");
-    } else {
-      setSidebarColor("#6ce1d1");
-    }
-  }, [location.pathname]);
+  const sidebarColor = "#6ce1d1";
 
   return (
     <SidebarContainer bg={sidebarColor}>
@@ -113,11 +110,13 @@ export default function Sidebar() {
         </Dropdown>
       </MenuBlock>
       <MenuBlock>
-  <Title
-    onClick={() => navigate("/calendar")}
-    style={{ cursor: "pointer" }}>
-    Calendar
-  </Title>
-</MenuBlock>
+        <Title
+          onClick={() => navigate("/calendar")}
+          style={{ cursor: "pointer" }}>
+          Calendar
+        </Title>
+      </MenuBlock>
     </SidebarContainer>
-  );}
+  );
+};
+export default Sidebar;

@@ -25,18 +25,19 @@ function AddNewWithMenu({ onSelect, setLang }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const wrapperRef = useRef(null);
   const { t } = useLanguage();
+  const handleClickOutsideLogic = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  };
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutsideLogic);
+    return () => document.removeEventListener("mousedown", handleClickOutsideLogic);
   }, []);
 
   const handleButtonClick = () => setMenuOpen((open) => !open);
+
   const handleSelect = (option) => {
     setMenuOpen(false);
     onSelect(option);
@@ -45,13 +46,19 @@ function AddNewWithMenu({ onSelect, setLang }) {
   return (
     <AddButtonWrapper ref={wrapperRef}>
       <AddButton onClick={handleButtonClick}>{t("addNew")}</AddButton>
+
       <LanguageButtonsWrapper>
         <LangButton onClick={() => setLang("en")}>EN</LangButton>
         <LangButton onClick={() => setLang("es")}>ES</LangButton>
       </LanguageButtonsWrapper>
+
       {menuOpen && (
         <DropdownMenu
-          style={{ opacity: 1, pointerEvents: "auto", transform: "translateY(0)" }}
+          style={{
+            opacity: 1,
+            pointerEvents: "auto",
+            transform: "translateY(0)",
+          }}
         >
           <DropdownItem onClick={() => handleSelect("income")}>
             {t("income")}
@@ -65,17 +72,17 @@ function AddNewWithMenu({ onSelect, setLang }) {
   );
 }
 
-export default function Dashboard() {
+const Dashboard = () => {
   const navigate = useNavigate();
   const { t, setLang } = useLanguage();
 
-  function handleMenuSelect(option) {
+  const handleMenuSelect = (option) => {
     if (option === "income") {
       navigate("/dashboard/addincome", { state: { fromDashboard: true } });
     } else if (option === "expenses") {
       navigate("/dashboard/addexpenses", { state: { fromDashboard: true } });
     }
-  }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -92,6 +99,7 @@ export default function Dashboard() {
         <Row>
           <HeaderCards />
         </Row>
+
         <Tables>
           <RemindersTable title={t("reminders")} />
           <PaymentsTable title={t("payments")} />
@@ -100,4 +108,6 @@ export default function Dashboard() {
       </Content>
     </Container>
   );
-}
+};
+
+export default Dashboard;

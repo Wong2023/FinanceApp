@@ -4,7 +4,7 @@ import {
   ModalBackdrop,ModalBox,ModalTitle,ExpenseForm,ModalRow,ModalActions,Label,Input,Select,Btn,BoxShadow,AddNewBox,Field
 } from "../styles/ExpenseModalStyles";
 
-export default function ExpenseModal({ onSave }) {
+const ExpenseModal = ({ onSave }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [state, setState] = useState({
@@ -119,3 +119,5 @@ export default function ExpenseModal({ onSave }) {
     </ModalBackdrop>
   );
 }
+
+export default ExpenseModal;
