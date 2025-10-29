@@ -29,7 +29,7 @@ export default function App() {
     <>
       <NoScroll />
       <Router>
-        <Background bgColor={layoutColor} />
+        <Background $bgColor={layoutColor} />
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
 

@@ -1,21 +1,12 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Title,
-  FormBox,
-  FormRow,
-  Label,
-  Input,
-  ButtonRow,
-  CancelButton,
-  SaveButton,
+import {Container,Title,FormBox,FormRow,Label,Input,ButtonRow,CancelButton,SaveButton,
 } from "../styles/addProviderStyles";
 import { useNavigate } from "react-router-dom";
-import { useLanguage } from "./LanguageContext"; 
+import { useLanguage } from "./LanguageContext";
 
-const AddProviderPage  = () => { 
+const AddProviderPage = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage(); 
+  const { t } = useLanguage();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -27,14 +18,10 @@ const AddProviderPage  = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name === "number") {
       const onlyNums = value.replace(/\D/g, "");
       setFormData({ ...formData, [name]: onlyNums });
-      return;
-    }
-
-    if (name === "email") {
-      setFormData({ ...formData, [name]: value });
       return;
     }
 
@@ -42,7 +29,7 @@ const AddProviderPage  = () => {
   };
 
   const handleCancel = () => {
-    navigate("/providers"); 
+    navigate("/providers");
   };
 
   const handleSave = () => {
@@ -50,39 +37,65 @@ const AddProviderPage  = () => {
       return;
     }
 
-    const existingProviders = JSON.parse(localStorage.getItem("providers")) || [];
+    let existingProviders = [];
+
+    try {
+      const saved = localStorage.getItem("providers");
+      existingProviders = saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      existingProviders = [];
+    }
+
     const updatedProviders = [...existingProviders, formData];
     localStorage.setItem("providers", JSON.stringify(updatedProviders));
 
-    navigate("/providers"); 
+    navigate("/providers");
   };
 
   return (
     <Container>
-      <Title>+ {t("addNew")} {t("providers")}</Title>
+      <Title>
+        + {t("addNew")} {t("providers")}
+      </Title>
 
       <FormBox>
         <FormRow>
           <Label>{t("name")}:</Label>
-          <Input type="text" name="name" value={formData.name} onChange={handleChange}
+          <Input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
           />
         </FormRow>
 
         <FormRow>
           <Label>{t("address")}:</Label>
-          <Input type="text" name="address" value={formData.address} onChange={handleChange}
+          <Input
+            type="text"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
           />
         </FormRow>
 
         <FormRow>
           <Label>{t("contact")}:</Label>
-          <Input type="text" name="number" value={formData.number} onChange={handleChange}
+          <Input
+            type="text"
+            name="number"
+            value={formData.number}
+            onChange={handleChange}
           />
         </FormRow>
 
         <FormRow>
           <Label>Email:</Label>
-          <Input type="email" name="email" value={formData.email} onChange={handleChange}
+          <Input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
         </FormRow>
 
@@ -100,7 +113,7 @@ const AddProviderPage  = () => {
           <CancelButton onClick={handleCancel}>{t("cancel")}</CancelButton>
           <SaveButton
             onClick={handleSave}
-            disabled={formData.email !== "" && !formData.email.includes("@")} // 🚫 кнопка блокируется если нет "@"
+            disabled={formData.email !== "" && !formData.email.includes("@")}
           >
             {t("save")}
           </SaveButton>
@@ -108,6 +121,6 @@ const AddProviderPage  = () => {
       </FormBox>
     </Container>
   );
-}
+};
 
 export default AddProviderPage;

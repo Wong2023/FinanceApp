@@ -48,8 +48,11 @@ const CalendarLogic = () => {
     const id = setInterval(tick, 20000);
     return () => clearInterval(id);
   };
-  useEffect(persistEvents, [events]);
-  useEffect(startTimerTick, [events, visible]);
+  useEffect(() => {
+  persistEvents();
+  startTimerTick();
+}, [events, visible]);
+
   const addEvent = () => {
     if (!title.trim() || !date) return;
     const d = combineDT(date, time);

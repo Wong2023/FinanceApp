@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const PageWrapper = styled.div`
   background: #6ce1d1;
   min-height: 100vh;
-  /* padding: 10px; */
   display: flex;
-  justify-content: flex-start; /* смещаем к левому краю */
+  justify-content: flex-start; 
   align-items: center;
   padding-right: 20px;
   padding-bottom: 100px;
@@ -36,7 +35,6 @@ export const Header = styled.div`
   }
 `;
 
-/* Обёртка для скролла только строк */
 export const TableScrollWrapper = styled.div`
   flex: 1;
   max-height: 55vh;
@@ -46,7 +44,6 @@ export const TableScrollWrapper = styled.div`
   border: 2px solid black;
   box-shadow: 0 10px 36px rgba(0, 0, 0, 0.18), 4px 4px 0 #000;
 
-  /* Скролл */
   scrollbar-width: thin;
   scrollbar-color: #b5b5b5 transparent;
 

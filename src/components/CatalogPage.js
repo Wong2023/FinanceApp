@@ -34,7 +34,7 @@ const CatalogPage = () => {
         </Header>
 
         <CategoriesWrapper>
-          <CategoryButton active>{t("category")}</CategoryButton>
+          <CategoryButton $active>{t("category")}</CategoryButton>
           <CategoryButton>{t("category")}</CategoryButton>
           <CategoryButton>{t("category")}</CategoryButton>
           <CategoryButton>{t("category")}</CategoryButton>

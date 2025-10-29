@@ -3,13 +3,16 @@ import styled from "styled-components";
 export const IncomeContainer = styled.div`
   background: #fff1e9;
   border: 2px solid black;
-  height: 800px;
-  padding: 38px 38px 36px 38px;
+  height: auto;
+  min-height: 800px;
+  padding: 38px;
   font-family: "Courier New", monospace;
   position: relative;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  margin-right: 20px;
+  margin: 20px;
+  @media (max-width: 768px) {
+    padding: 20px;
+    margin: 10px;
+  }
 `;
 
 export const IncomeHeader = styled.div`
@@ -18,6 +21,10 @@ export const IncomeHeader = styled.div`
   font-weight: bold;
   color: #222;
   margin-bottom: 28px;
+  @media (max-width: 768px) {
+    font-size: 26px;
+    text-align: center;
+  }
 `;
 
 export const StatRow = styled.div`
@@ -25,16 +32,25 @@ export const StatRow = styled.div`
   gap: 28px;
   align-items: flex-end;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    justify-content: center;
+    gap: 18px;
+  }
 `;
 
 export const StatBox = styled.div`
   background: #ffe144;
   box-shadow: 3px 4px 0 #222;
   min-width: 180px;
-  padding: 18px 36px 14px 28px;
+  padding: 18px 28px;
   border: 1.5px solid #222;
   display: flex;
   flex-direction: column;
+  @media (max-width: 480px) {
+    min-width: 140px;
+    padding: 14px 18px;
+  }
 `;
 
 export const TableControls = styled.div`
@@ -42,6 +58,8 @@ export const TableControls = styled.div`
   align-items: center;
   gap: 16px;
   margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: center;
 
   .add-income-btn {
     font-family: "Courier New", monospace;
@@ -64,6 +82,11 @@ export const TableControls = styled.div`
       box-shadow: none;
       transform: translate(2px, 2px);
     }
+
+    @media (max-width: 480px) {
+      font-size: 15px;
+      padding: 7px 16px;
+    }
   }
 
   .mode-select,
@@ -75,9 +98,13 @@ export const TableControls = styled.div`
     font-size: 15px;
     padding: 7px 13px;
     font-weight: bold;
-    margin-left: 4px;
-    margin-right: 4px;
+    margin: 4px;
     cursor: pointer;
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+      padding: 5px 10px;
+    }
   }
 `;
 
@@ -89,6 +116,11 @@ export const MainTable = styled.div`
   border: 2px solid #222;
   max-height: 400px;
   overflow-y: auto;
+  overflow-x: auto;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const TableHeader = styled.div`
@@ -100,17 +132,26 @@ export const TableHeader = styled.div`
   position: sticky;
   top: 0;
   z-index: 2;
+  min-width: 600px;
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+  }
 `;
 
 export const TableBody = styled.div`
   background: #fff1e9;
   border-bottom: 1px solid #ddd;
+  min-width: 600px;
 `;
 
 export const TableRow = styled.div`
   display: flex;
   border-bottom: 1px solid #ddd;
   font-size: 17px;
+  @media (max-width: 480px) {
+    font-size: 15px;
+  }
 `;
 
 export const TableCell = styled.div`
@@ -122,6 +163,10 @@ export const TableCell = styled.div`
 
   &:last-child {
     text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px 6px;
   }
 `;
 
@@ -137,6 +182,10 @@ export const TableActionLink = styled.span`
     color: #04426a;
     text-decoration: underline;
   }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 export const DeleteButton = styled.span`
@@ -151,5 +200,9 @@ export const DeleteButton = styled.span`
   &:hover {
     color: darkred;
     text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
   }
 `;

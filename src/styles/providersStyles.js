@@ -59,7 +59,6 @@ export const ScrollContainer = styled.div`
   border: 1px solid black;
   box-shadow: 5px 5px black;
 
-  /* Кастомный скроллбар (Chrome, Edge, Opera) */
   &::-webkit-scrollbar {
     width: 7px;
     background: #f5ede8;

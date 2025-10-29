@@ -7,7 +7,7 @@ export const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${props => props.bgColor || "#6ce1d1"};
+  background: ${props => props.$bgColor || "#6ce1d1"};
   z-index: -1; /* ← чтобы всегда был за контентом */
 `;
 

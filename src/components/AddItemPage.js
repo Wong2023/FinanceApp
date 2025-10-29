@@ -110,7 +110,7 @@ const AddItemPage = () => {
           </ModalContent>
           <ModalActions>
             <ModalBtn onClick={() => navigate("/catalog")}>{t("cancel")}</ModalBtn>
-            <ModalBtn primary onClick={saveItem}>{t("save")}</ModalBtn>
+            <ModalBtn dir=""$primary onClick={saveItem}>{t("save")}</ModalBtn>
           </ModalActions>
         </ModalBlock>
       </ModalBg>

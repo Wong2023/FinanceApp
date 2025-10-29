@@ -6,18 +6,7 @@ import RemindersTable from "./RemindersTable";
 import PaymentsTable from "./PaymentsTable";
 import InfoTable from "./InfoTable";
 import {
-  Container,
-  Content,
-  Title,
-  Row,
-  Tables,
-  AddButtonWrapper,
-  AddButton,
-  DropdownMenu,
-  DropdownItem,
-  LogoutButton,
-  LanguageButtonsWrapper,
-  LangButton,
+  Container,Content,Title,Row,Tables,AddButtonWrapper,AddButton,DropdownMenu,DropdownItem,LogoutButton,LanguageButtonsWrapper,LangButton,
 } from "../styles/dashboard";
 import { useLanguage } from "../components/LanguageContext";
 

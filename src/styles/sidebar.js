@@ -10,7 +10,7 @@ export const SidebarContainer = styled.div`
 
 export const SidebarIcon = styled.img`
   display: block;
-  margin: 40px auto 60px auto; /* сверху по центру + отступ снизу */
+  margin: 40px auto 60px auto; 
   width: 90px;
   height: 90px;
 `;
@@ -21,7 +21,7 @@ export const MenuBlock = styled.div`
   margin-bottom: 16px;
   transition: margin-bottom 0.3s ease;
   padding-bottom: ${(props) =>
-    props.expanded || props.isDashboard ? "8px" : "0"};
+    props.$expanded || props.$isDashboard ? "8px" : "0"};
   border: 2px solid black;
   box-shadow: 4px 4px 0px #000;
 `;
@@ -38,15 +38,15 @@ export const Title = styled.div`
 export const Dropdown = styled.div`
   overflow: hidden;
   max-height: ${(props) =>
-    props.isDashboard ? "none" : props.show ? "600px" : "0"};
+    props.$isDashboard ? "none" : props.$show ? "600px" : "0"};
   transition: max-height 0.35s ease-in-out;
   background: black;
 `;
 
 export const DropdownItem = styled.div`
   padding: 10px 16px;
-  color: ${(props) => (props.orange ? "#ffb400" : "white")};
-  font-weight: ${(props) => (props.isCurrent ? "bold" : "normal")};
+  color: ${(props) => (props.$orange ? "#ffb400" : "white")};
+  font-weight: ${(props) => (props.$isCurrent ? "bold" : "normal")};
   border-bottom: 1px solid #333;
   transition: background 0.2s;
   cursor: pointer;

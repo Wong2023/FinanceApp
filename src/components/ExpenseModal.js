@@ -111,7 +111,7 @@ const ExpenseModal = ({ onSave }) => {
             </ExpenseForm>
             <ModalActions>
               <Btn type="button" onClick={handleClose}>Cancel</Btn>
-              <Btn primary type="submit">Save</Btn>
+              <Btn $primary type="submit">Save</Btn>
             </ModalActions>
           </form>
         </ModalBox>

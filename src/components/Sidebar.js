@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  SidebarContainer,
-  SidebarIcon,
-  MenuBlock,
-  Title,
-  Dropdown,
-  DropdownItem,
+import {SidebarContainer,SidebarIcon,MenuBlock,Title,Dropdown,DropdownItem,
 } from "../styles/sidebar";
 import { useLanguage } from "./LanguageContext"; 
-
 const iconUrl = "https://i.imgur.com/vD4fJbl.png";
 const Sidebar = () => {
   const [hovered, setHovered] = useState("");
@@ -21,46 +14,46 @@ const Sidebar = () => {
   const sidebarColor = "#6ce1d1";
 
   return (
-    <SidebarContainer bg={sidebarColor}>
+    <SidebarContainer $bg={sidebarColor}>
       <SidebarIcon src={iconUrl} alt="Sidebar Icon" />
       <MenuBlock
         onMouseEnter={() => setHovered("murkhasya")}
         onMouseLeave={() => setHovered("")}
-        expanded={hovered === "murkhasya" || isDashboard}
-        isDashboard={isDashboard}>
+        $expanded={hovered === "murkhasya" || isDashboard}
+        $isDashboard={isDashboard}>
         <Title>{t("murkhasya")}</Title>
         <Dropdown
-          show={hovered === "murkhasya" || isDashboard}
-          isDashboard={isDashboard}>
+          $show={hovered === "murkhasya" || isDashboard}
+          $isDashboard={isDashboard}>
           <DropdownItem
-            isCurrent={
+            $isCurrent={
               location.pathname === "/" || location.pathname === "/dashboard"
             }
             onClick={() => navigate("/")}>
             {t("dashboard")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/income"}
+            $isCurrent={location.pathname === "/income"}
             onClick={() => navigate("/income")}>
             {t("income")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/expenses"}
+            $isCurrent={location.pathname === "/expenses"}
             onClick={() => navigate("/expenses")}>
             {t("expenses")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/client"}
+            $isCurrent={location.pathname === "/client"}
             onClick={() => navigate("/client")}>
             {t("client")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/providers"}
+            $isCurrent={location.pathname === "/providers"}
             onClick={() => navigate("/providers")}>
             {t("providers")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/catalog"}
+            $isCurrent={location.pathname === "/catalog"}
             onClick={() => navigate("/catalog")}>
             {t("catalog")}
           </DropdownItem>
@@ -69,22 +62,22 @@ const Sidebar = () => {
       <MenuBlock
         onMouseEnter={() => setHovered("charcha")}
         onMouseLeave={() => setHovered("")}
-        expanded={hovered === "charcha"}>
+        $expanded={hovered === "charcha"}>
         <Title>{t("charcha")}</Title>
-        <Dropdown show={hovered === "charcha"}>
+        <Dropdown $show={hovered === "charcha"}>
           <DropdownItem
-            orange
-            isCurrent={location.pathname === "/income"}
+            $orange
+            $isCurrent={location.pathname === "/income"}
             onClick={() => navigate("/income")}>
             {t("income")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/expenses"}
+            $isCurrent={location.pathname === "/expenses"}
             onClick={() => navigate("/expenses")}>
             {t("expenses")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/personal"}
+            $isCurrent={location.pathname === "/personal"}
             onClick={() => navigate("/personal")}>
             {t("personal")}
           </DropdownItem>
@@ -93,17 +86,17 @@ const Sidebar = () => {
       <MenuBlock
         onMouseEnter={() => setHovered("personal")}
         onMouseLeave={() => setHovered("")}
-        expanded={hovered === "personal"}>
+        $expanded={hovered === "personal"}>
         <Title>{t("personal")}</Title>
-        <Dropdown show={hovered === "personal"}>
+        <Dropdown $show={hovered === "personal"}>
           <DropdownItem
-            orange
-            isCurrent={location.pathname === "/stock"}
+            $orange
+            $isCurrent={location.pathname === "/stock"}
             onClick={() => navigate("/stock")}>
             {t("stock")}
           </DropdownItem>
           <DropdownItem
-            isCurrent={location.pathname === "/crypto"}
+            $isCurrent={location.pathname === "/crypto"}
             onClick={() => navigate("/crypto")}>
             {t("crypto")}
           </DropdownItem>

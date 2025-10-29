@@ -11,13 +11,11 @@ const ClientPage = () => {
   const [search, setSearch] = useState("");
   const [allClients, setAllClients] = useState([]);
 
-  // 🔹 Вынесенная логика загрузки клиентов
   const loadClients = () => {
     const storedClients = JSON.parse(localStorage.getItem("clientsData")) || [];
     setAllClients([...clients, ...storedClients]);
   };
 
-  // 🔹 Вынесенная логика для подписки на изменения localStorage
   const subscribeToStorageChanges = () => {
     const handleStorageChange = () => loadClients();
     window.addEventListener("storage", handleStorageChange);

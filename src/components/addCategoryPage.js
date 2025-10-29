@@ -59,7 +59,7 @@ const AddCategory = () => {
         </ModalContent>
         <ModalActions>
           <ModalBtn onClick={handleCancel}>{t("cancel")}</ModalBtn>
-          <ModalBtn primary onClick={handleSave}>{t("save")}</ModalBtn>
+          <ModalBtn $primary onClick={handleSave}>{t("save")}</ModalBtn>
         </ModalActions>
       </ModalBlock>
     </PageContainer>

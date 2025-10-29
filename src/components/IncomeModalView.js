@@ -24,10 +24,10 @@ const IncomeModal = ({ onSave, onClose }) => {
       </HeaderContainer>
 
       <TabsContainer>
-        <ModalBtn primary={tab === "gallery"} onClick={() => setTab("gallery")} disabled={editingMode}>
+        <ModalBtn $primary={tab === "gallery"} onClick={() => setTab("gallery")} disabled={editingMode}>
           {t("galleryIncome")}
         </ModalBtn>
-        <ModalBtn primary={tab === "online"} onClick={() => setTab("online")} disabled={editingMode}>
+        <ModalBtn $primary={tab === "online"} onClick={() => setTab("online")} disabled={editingMode}>
           {t("onlineIncome")}
         </ModalBtn>
       </TabsContainer>
@@ -107,7 +107,7 @@ const IncomeModal = ({ onSave, onClose }) => {
 
           <ModalActions>
             <ModalBtn type="button" onClick={handleCancel}>{t("cancel")}</ModalBtn>
-            <ModalBtn primary type="submit">{editingMode ? t("update") : t("save")}</ModalBtn>
+            <ModalBtn $primary type="submit">{editingMode ? t("update") : t("save")}</ModalBtn>
           </ModalActions>
         </ModalBlock>
       </form>

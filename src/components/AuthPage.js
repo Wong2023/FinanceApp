@@ -73,8 +73,10 @@ const AuthPage = () => {
     }
   };
 
-  useEffect(() => { checkAuthStatus(); }, [navigate]);
-  useEffect(() => { debugFetchUsers(); }, []);
+  useEffect(() => {
+  checkAuthStatus();
+  debugFetchUsers();
+}, [navigate]);
 
   return (
     <AuthContainer>

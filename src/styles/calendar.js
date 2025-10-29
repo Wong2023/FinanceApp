@@ -1,14 +1,19 @@
-// ✅ src/styles/calendar.js
 import styled from "styled-components";
 
 /* Базовая раскладка */
 export const Container = styled.div`
   display: flex;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   background: #6ce1d1;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
 
 export const Content = styled.div`
@@ -23,23 +28,45 @@ export const Content = styled.div`
   gap: 20px;
   margin: 20px;
   font-family: "Courier New", monospace;
+
+  @media (max-width: 1024px) {
+    margin: 15px;
+    padding: 16px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 10px;
+    padding: 12px;
+  }
 `;
 
 export const Title = styled.h1`
   font-size: 26px;
   font-weight: bold;
   margin: 0;
-  font-family: "Courier New", monospace;
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
-/* Верхний ряд: узкая левая колонка + большой календарь справа */
+/* Верхний ряд */
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: 1fr 360px; /* левая часть заметно уже */
+  grid-template-columns: 1fr 360px;
   gap: 20px;
 
   @media (max-width: 1200px) {
     grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 768px) {
+    gap: 15px;
   }
 `;
 
@@ -48,6 +75,11 @@ export const LeftColumn = styled.div`
   flex-direction: column;
   gap: 16px;
   margin-left: -70px;
+
+  @media (max-width: 1200px) {
+    margin-left: 0;
+    align-items: center;
+  }
 `;
 
 /* Карточки форм */
@@ -60,6 +92,11 @@ export const FormCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 440px;
+  }
 `;
 
 export const Label = styled.label`
@@ -76,7 +113,11 @@ export const Input = styled.input`
   font-family: "Courier New", monospace;
   font-size: 14px;
   outline: none;
-  transition: transform 0.05s ease;
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
 `;
 
 export const DateInline = styled(Input).attrs({ type: "date" })``;
@@ -90,6 +131,11 @@ export const Select = styled.select`
   font-size: 14px;
   outline: none;
   cursor: pointer;
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
 `;
 
 export const Button = styled.button`
@@ -111,19 +157,36 @@ export const Button = styled.button`
     box-shadow: none;
     transform: translate(2px, 2px);
   }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
 `;
 
-/* ——— ПРАВАЯ ПАНЕЛЬ: БОЛЬШОЙ КАЛЕНДАРЬ ——— */
+/* ПРАВАЯ ПАНЕЛЬ */
 export const CalendarPanel = styled.div`
   background: #f8f6f4;
   border: 2px solid black;
   box-shadow: 3px 3px 0 black;
-  /* margin-left: 100px; */
   width: 900px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   height: 740px;
+
+  @media (max-width: 1400px) {
+    width: 100%;
+    max-width: 850px;
+  }
+
+  @media (max-width: 1024px) {
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
 `;
 
 export const CalendarHeader = styled.div`
@@ -134,6 +197,11 @@ export const CalendarHeader = styled.div`
   background: #ffe600;
   padding: 10px 12px;
   margin-bottom: 12px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const YearNav = styled.div`
@@ -178,8 +246,12 @@ export const MonthsGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -205,6 +277,14 @@ export const DaysGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 6px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export const DayName = styled.div`
@@ -231,6 +311,10 @@ export const DayCell = styled.div`
   &:hover {
     background: #fffbe6;
   }
+
+  @media (max-width: 480px) {
+    height: 55px;
+  }
 `;
 
 export const DayNumber = styled.div`
@@ -238,7 +322,6 @@ export const DayNumber = styled.div`
   margin-bottom: 4px;
 `;
 
-/* контейнер для точек (без текста задач) */
 export const DayDots = styled.div`
   display: flex;
   gap: 4px;
@@ -254,7 +337,7 @@ export const DayDot = styled.span`
   border-radius: 50%;
 `;
 
-/* ——— СПИСОК СОБЫТИЙ — теперь расположен в левой колонке ниже форм ——— */
+/* Список событий */
 export const EventsCard = styled.div`
   background: #f8f6f4;
   border: 2px solid black;
@@ -263,8 +346,13 @@ export const EventsCard = styled.div`
   display: flex;
   flex-direction: column;
   width: 435px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
+/* --- Остальные элементы (НЕ УДАЛЕНЫ) --- */
 export const EventsHeader = styled.div`
   background: #ffe600;
   border-bottom: 2px solid black;
@@ -277,25 +365,8 @@ export const EventsList = styled.div`
   flex-direction: column;
   padding: 10px;
   gap: 8px;
-
-  /* скролл ровно в списке после ~5 задач */
   max-height: 275px;
   overflow-y: auto;
-
-  scrollbar-width: thin;
-  scrollbar-color: #000 #f8f6f4;
-
-  &::-webkit-scrollbar { width: 10px; }
-  &::-webkit-scrollbar-track {
-    background: #f8f6f4;
-    border-left: 2px solid #000;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #ffe600;
-    border: 2px solid #000;
-    box-shadow: inset 0 0 0 1px #ffe600;
-  }
-  &::-webkit-scrollbar-thumb:hover { background: #000; border-color: #000; }
 `;
 
 export const EventItem = styled.div`
@@ -348,11 +419,10 @@ export const SmallButton = styled.button`
 
 export const EditRow = styled.div`
   display: flex;
-  flex-direction: column; /* теперь редактирование идёт по вертикали */
+  flex-direction: column;
   gap: 10px;
   align-items: stretch;
   width: 100%;
-  box-sizing: border-box;
 `;
 
 export const FilterRow = styled.div`
@@ -360,7 +430,7 @@ export const FilterRow = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 
-  @media (width: 920px) {
+  @media (max-width: 920px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -369,7 +439,7 @@ export const SearchInput = styled(Input)`
   width: 60%;
 `;
 
-/* Тосты справа снизу */
+/* --- Toast уведомления --- */
 export const ToastStack = styled.div`
   position: fixed;
   right: 28px;
@@ -378,6 +448,11 @@ export const ToastStack = styled.div`
   flex-direction: column;
   gap: 10px;
   z-index: 9999;
+
+  @media (max-width: 600px) {
+    right: 10px;
+    bottom: 10px;
+  }
 `;
 
 export const ToastItem = styled.div`
