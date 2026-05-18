@@ -28,7 +28,8 @@ export default function App() {
   return (
     <>
       <NoScroll />
-      <Router>
+      {/* ИСПРАВЛЕНО ТУТ: Добавлен basename для корректной работы путей на GitHub Pages */}
+      <Router basename="/FinanceApp">
         <Background $bgColor={layoutColor} />
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
