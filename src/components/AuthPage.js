@@ -1,4 +1,3 @@
-// AuthPage.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -6,8 +5,6 @@ import {
   AuthSwitch, Toast, LanguageButtonsWrapper, LangButton,
 } from "../styles/authStyles";
 import { useLanguage } from "./LanguageContext";
-
-const MCF_BASE = "/api";
 
 const AuthPage = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -21,19 +18,15 @@ const AuthPage = () => {
     if (localStorage.getItem("auth") === "true") navigate("/dashboard");
   };
 
-  const fetchAllUsers = async () => {
+  // Имитация бэкенда: достаем пользователей из localStorage
+  const fetchAllUsersLocal = () => {
     try {
-      const res = await fetch(`${MCF_BASE}/api/users/all`);
-      return res.ok ? await res.json() : null;
+      const users = localStorage.getItem("local_users");
+      return users ? JSON.parse(users) : [];
     } catch (err) {
-      console.error("fetchAllUsers error:", err);
-      return null;
+      console.error("Error reading local users:", err);
+      return [];
     }
-  };
-
-  const debugFetchUsers = async () => {
-    const users = await fetchAllUsers();
-    console.log("users (debug):", users);
   };
 
   const showToast = (msg) => {
@@ -43,30 +36,41 @@ const AuthPage = () => {
 
   const handleAuth = async () => {
     if (!username || !password) return showToast("Insert username and password");
-    const users = await fetchAllUsers();
-    if (!users) return showToast("error with server connection");
+    
+    // Получаем список зарегистрированных пользователей локально
+    const users = fetchAllUsersLocal();
 
     if (isRegister) {
-      const exists = users.find((u) => (u.email || u.name) === username);
+      // Ищем, есть ли уже такой пользователь
+      const exists = users.find((u) => u.name === username || u.email === username);
       if (exists) return showToast("User already exist");
 
-      const body = {
-        name: username, email: username, password,
-        contact: "0000000000", address: "",
+      // Формируем объект пользователя (структура сохранена как у твоего сервера)
+      const newUser = {
+        id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2),
+        name: username,
+        email: username,
+        password: password, // В реальном проекте хешируется, для демо пойдет
+        contact: "0000000000",
+        address: "",
         projectId: "ec08bb10-c5c8-4608-8176-164906872545",
       };
 
-      const res = await fetch(`${MCF_BASE}/users/new`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      // Сохраняем обновленный список в localStorage
+      users.push(newUser);
+      localStorage.setItem("local_users", JSON.stringify(users));
 
-      if (!res.ok) return showToast("registration error");
       showToast("registration successful");
       setIsRegister(false);
+      setUsername("");
+      setPassword("");
     } else {
-      const user = users.find((u) => (u.email || u.name) === username);
+      // Логика Входа
+      const user = users.find((u) => (u.email === username || u.name === username) && u.password === password);
+      
       if (!user) return showToast("incorrect login or password");
+      
+      // Авторизуем сессию
       localStorage.setItem("auth", "true");
       localStorage.setItem("user", JSON.stringify(user));
       navigate("/dashboard");
@@ -74,9 +78,10 @@ const AuthPage = () => {
   };
 
   useEffect(() => {
-  checkAuthStatus();
-  debugFetchUsers();
-}, [navigate]);
+    checkAuthStatus();
+    // Логируем пользователей в консоль браузера для отладки, если нужно
+    console.log("Current local users database:", fetchAllUsersLocal());
+  }, [navigate]);
 
   return (
     <AuthContainer>
@@ -89,10 +94,18 @@ const AuthPage = () => {
           </LanguageButtonsWrapper>
         </div>
 
-        <AuthInput type="text" placeholder={t("username")} value={username}
-          onChange={(e) => setUsername(e.target.value)} />
-        <AuthInput type="password" placeholder={t("password")} value={password}
-          onChange={(e) => setPassword(e.target.value)} />
+        <AuthInput 
+          type="text" 
+          placeholder={t("username")} 
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} 
+        />
+        <AuthInput 
+          type="password" 
+          placeholder={t("password")} 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+        />
 
         <AuthButton onClick={handleAuth}>
           {isRegister ? t("register") : t("login")}
